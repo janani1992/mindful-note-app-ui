@@ -1,0 +1,48 @@
+import React from 'react';
+import { PRIORITIES } from '../../constants/priorities';
+import { formatDateTime } from '../../utils/dateUtils';
+
+const NoteDetail = ({ note }) => {
+  if (!note) return null;
+
+  const priority = PRIORITIES[note.priority];
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <label className="block text-sm font-semibold text-slate-700 mb-2">Title</label>
+        <h3 className="text-lg font-semibold text-slate-800">{note.title}</h3>
+      </div>
+
+      <div>
+        <label className="block text-sm font-semibold text-slate-700 mb-2">Priority</label>
+        <span className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold ${priority.color}`}>
+          <span>{priority.emoji}</span>
+          {priority.label}
+        </span>
+      </div>
+
+      <div>
+        <label className="block text-sm font-semibold text-slate-700 mb-2">Content</label>
+        <div className="bg-slate-50 p-4 rounded-xl">
+          <p className="text-slate-700 whitespace-pre-wrap leading-relaxed">{note.content}</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-semibold text-slate-700 mb-2">Created</label>
+          <p className="text-slate-600">{formatDateTime(note.createdAt)}</p>
+        </div>
+        {note.updatedAt && (
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-2">Last Updated</label>
+            <p className="text-slate-600">{formatDateTime(note.updatedAt)}</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default NoteDetail;
