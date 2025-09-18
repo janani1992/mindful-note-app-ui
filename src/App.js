@@ -19,7 +19,7 @@ export default function App() {
   const loadNotes = async () => {
     try {
       setLoading(true);
-      const response = await fetch(API_BASE);
+      const response = await fetch(`${API_BASE}/notes`);
       if (response.ok) {
         const data = await response.json();
         setNotes(data);
