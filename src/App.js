@@ -35,7 +35,7 @@ export default function App() {
 
   const createNote = async () => {
     try {
-      const response = await fetch(API_BASE, {
+      const response = await fetch(`${API_BASE}/createNote`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -52,7 +52,7 @@ export default function App() {
   const deleteNote = async (id) => {
     if (!window.confirm('Delete this note?')) return;
     try {
-      const response = await fetch(`${API_BASE}/${id}`, { method: 'DELETE' });
+      const response = await fetch(`${API_BASE}/deleteNote/${id}`, { method: 'DELETE' });
       if (response.ok) loadNotes();
     } catch (error) {
       console.error('Error deleting note:', error);
